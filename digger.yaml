@@ -1,18 +1,32 @@
 projects:
 - name: dev
-  dir: .
-  workspace: default
-  workflow: dev
+  dir: dev
+  workflow: develop
+- name: prod
+  dir: prod
+  workflow: production
 workflows:
-  dev:
+  develop:
     env_vars:
       state:
       - name: AWS_ACCESS_KEY_ID
-        value_from: TF_STATE_ACCESS_KEY_ID
+        value_from: DEV_AWS_ACCESS_KEY_ID
       - name: AWS_SECRET_ACCESS_KEY
-        value_from: TF_STATE_SECRET_ACCESS_KEY
+        value_from: DEV_AWS_SECRET_ACCESS_KEY
       commands:
       - name: AWS_ACCESS_KEY_ID
         value_from: DEV_AWS_ACCESS_KEY_ID
       - name: AWS_SECRET_ACCESS_KEY
         value_from: DEV_AWS_SECRET_ACCESS_KEY
+  production:
+    env_vars:
+      state:
+      - name: AWS_ACCESS_KEY_ID
+        value_from: PROD_AWS_ACCESS_KEY_ID
+      - name: AWS_SECRET_ACCESS_KEY
+        value_from: PROD_AWS_SECRET_ACCESS_KEY
+      commands:
+      - name: AWS_ACCESS_KEY_ID
+        value_from: PROD_AWS_ACCESS_KEY_ID
+      - name: AWS_SECRET_ACCESS_KEY
+        value_from: PROD_AWS_SECRET_ACCESS_KEY
